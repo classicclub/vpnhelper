@@ -2,8 +2,6 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
-
-
 RE_PASS = re.compile(r'(<li><strong>Password:<\/strong>)(?P<password>[^<]+)(<\/li>)')
 
 TEXT_ONLINE = 'Online'
@@ -25,7 +23,6 @@ def get_vpn_status():
 
     table = soup.find_all(
         'table', attrs={'class': "table table-striped table-bordered dataTable"})
-    # vpns = []
     if table:
         table = table[0]
         tbody = table.tbody
@@ -47,10 +44,7 @@ def get_vpn_status():
                 elif i == 8:
                     load = tcol.text.strip()[:-1]
             if name:
-                # vpns.append({'name': name, 'loc': loc,
-                #              'online': online, 'load': load})
-                yield {'name': name, 'loc': loc,
-                       'online': online, 'load': load}
+                yield {'name': name, 'loc': loc, 'online': online, 'load': load}
 
 
 
